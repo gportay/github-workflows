@@ -1,0 +1,21 @@
+name: OpenBSD-vm
+
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: A job to run test in OpenBSD
+    steps:
+    - uses: actions/checkout@v4
+    - name: Test in OpenBSD
+      id: test
+      uses: vmactions/openbsd-vm@v1
+      with:
+        usesh: true
+        prepare: |
+          pkg_add bash
+          pkg_add gmake
+
+        run: |
+          gmake test
