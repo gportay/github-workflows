@@ -16,6 +16,5 @@ jobs:
         prepare: |
           pkg install -y bash
           pkg install -y gmake
-
         run: |
           gmake test

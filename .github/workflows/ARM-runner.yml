@@ -10,4 +10,4 @@ jobs:
     - uses: pguyot/arm-runner-action@v2
       with:
         commands: |
-            make test
+          make test

@@ -16,6 +16,5 @@ jobs:
         prepare: |
           pkg_add bash
           pkg_add gmake
-
         run: |
           gmake test

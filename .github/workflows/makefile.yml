@@ -4,20 +4,15 @@ on: workflow_dispatch
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
-
     - name: Compile
       run: make
-
     - name: Run test
       run: make test
-
     - name: GH Release
       uses: softprops/action-gh-release@v2
       if: github.ref_type == 'tag'
       with:
-          files: helloworld
+        files: helloworld
