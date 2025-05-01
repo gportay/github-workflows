@@ -18,3 +18,10 @@ jobs:
           pkg_add gmake
         run: |
           gmake test
+          gmake install PREFIX="$PWD/_install"
+          ( cd "$PWD/_install" && tar czf ../OpenBSD.tar.gz . )
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      if: github.ref_type == 'tag'
+      with:
+        files: OpenBSD.tar.gz
