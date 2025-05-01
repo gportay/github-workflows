@@ -1,3 +1,5 @@
+PREFIX ?= /usr/local
+
 .PHONY: all
 all: helloworld
 
@@ -5,6 +7,14 @@ all: helloworld
 test: helloworld
 	$(CURDIR)/helloworld | grep -q "^Hello World!$$"
 
+.PHONY: install
+install:
+	install -D -m755 helloworld $(DESTDIR)$(PREFIX)/bin/helloworld
+
 .PHONY: clean
 clean:
 	rm -f helloworld
+
+.PHONY: debian 
+debian:
+	debuild -us -uc

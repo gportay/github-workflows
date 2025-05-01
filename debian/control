@@ -1,0 +1,14 @@
+Source: github-workflows
+Maintainer: Ga√l PORTAY <gael.portay@gmail.com>
+Homepage: https://www.portay.io/github-workflows
+Vcs-Git: https://github.com/gportay/github-workflows
+Section: misc
+Priority: optional
+Standards-Version: 2
+Build-Depends: debhelper-compat (= 13)
+
+Package: helloworld
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Hello, World!
+ From GitHub, and elsewhere.

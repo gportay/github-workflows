@@ -1,0 +1,7 @@
+# Use /bin/bash
+DOSHELL="/bin/bash"
+for file in .bashrc .bash_history
+do
+	[ -e "$PWD/$file" ] || continue
+	DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/$file:$HOME/$file")
+done
