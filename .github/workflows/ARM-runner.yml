@@ -11,6 +11,7 @@ jobs:
       with:
         commands: |
           make test
+          DEBIAN_FRONTEND=noninteractive apt update
           DEBIAN_FRONTEND=noninteractive apt install -y devscripts debhelper
           make debian
           make install PREFIX="$PWD/_install"
