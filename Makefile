@@ -9,7 +9,7 @@ test: helloworld
 
 .PHONY: install
 install:
-	mkdir -p $(DESTDIR)$(PREFIX)/bin/helloworld
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp helloworld $(DESTDIR)$(PREFIX)/bin/helloworld
 
 .PHONY: clean
