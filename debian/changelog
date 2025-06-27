@@ -1,5 +1,5 @@
-github-workflows (2) UNRELEASED; urgency=low
+github-workflows (3) UNRELEASED; urgency=low
 
-  * Initial packaging.
+  * Initial release.
 
- -- Gaël PORTAY <gael.portay@gmail.com>  Thu May 1 20:18:27 2025 +0200
+ -- Gaël PORTAY <gael.portay@gmail.com>  Thu, 1 May 2025 20:18:27 +0200
