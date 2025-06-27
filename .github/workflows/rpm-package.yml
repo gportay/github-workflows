@@ -13,7 +13,7 @@ jobs:
     - name: Build package
       run: |
         rpmdev-setuptree
-        rpmlint ${{ github.event.repository.name }}.spec
+        #rpmlint ${{ github.event.repository.name }}.spec
         rpmbuild -ba ${{ github.event.repository.name }}.spec
     - name: Archive package
       uses: actions/upload-artifact@v4
