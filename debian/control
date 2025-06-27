@@ -12,3 +12,4 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: My Github Workflows Experimentations.
  .
+ A throwaway repository to get a first step in the world of CI.
