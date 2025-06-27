@@ -1,0 +1,22 @@
+name: rpm-package
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install dependencies
+      run: |
+        dnf install -y make rpmdevtools rpmlint
+    - name: Build package
+      run: |
+        rpmdev-setuptree
+        rpmlint ${{ github.event.repository.name }}.spec
+        rpmbuild -ba ${{ github.event.repository.name }}.spec
+    - name: Archive package
+      uses: actions/upload-artifact@v4
+      with:
+        path: |
+          *.rpm
