@@ -1,0 +1,3 @@
+FROM fedora:latest
+RUN dnf install -y make rpmdevtools rpmlint
+CMD ["rpmbuild", "-ba", "github-workflows.specs"]
