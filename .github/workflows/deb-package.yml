@@ -16,6 +16,8 @@ jobs:
         cd ${{ github.event.repository.name }}
         dpkg-buildpackage -us -uc
         cd ..
+    - name: Lint package
+      run: |
         lintian *.deb
     - name: Archive package
       uses: actions/upload-artifact@v4
