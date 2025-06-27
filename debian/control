@@ -8,6 +8,6 @@ Standards-Version: 2
 Build-Depends: debhelper-compat (= 13)
 
 Package: helloworld
-Architecture: all
+Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: My Github Workflows Experimentations.
