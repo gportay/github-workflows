@@ -1,5 +1,5 @@
 Source: github-workflows
-Maintainer: GaÃl PORTAY <gael.portay@gmail.com>
+Maintainer: GaÃ«l PORTAY <gael.portay@gmail.com>
 Homepage: https://www.portay.io/github-workflows
 Vcs-Git: https://github.com/gportay/github-workflows
 Section: misc
@@ -8,7 +8,6 @@ Standards-Version: 2
 Build-Depends: debhelper-compat (= 13)
 
 Package: helloworld
-Architecture: any
+Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Hello, World!
- From GitHub, and elsewhere.
+Description: My Github Workflows Experimentations.
