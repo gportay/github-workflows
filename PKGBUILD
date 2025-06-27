@@ -23,5 +23,5 @@ check() {
 
 package() {
 	cd "$pkgname-$pkgver"
-	make DESTDIR="$pkgdir/" install
+	make DESTDIR="$pkgdir/" PREFIX=/usr install
 }
