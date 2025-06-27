@@ -19,11 +19,6 @@ jobs:
     - name: Lint package
       run: |
         lintian *.deb
-    - name: Archive package
-      uses: actions/upload-artifact@v4
-      with:
-        path: |
-          *.deb
     - name: Create release
       uses: softprops/action-gh-release@v2
       if: github.ref_type == 'tag'
