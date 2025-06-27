@@ -1,3 +1,11 @@
+case "$DOSH_DOCKERFILE" in
+Dockerfile.debian) home=1;;
+Dockerfile.fedora)
+	DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/rpmbuild:$HOME/rpmbuild")
+	DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/github-workflows.spec:$HOME/rpmbuild/SPECS/github-workflows.spec")
+	working_directory="$HOME/rpmbuild/SPECS"
+esac
+
 # Use /bin/bash
 DOSHELL="/bin/bash"
 for file in .bashrc .bash_history

@@ -1,4 +1,6 @@
 FROM debian:latest
 ENV DPKG_FRONTEND=noninteractive
 RUN apt-get -y update && apt-get -y install asciidoctor debhelper
+RUN apt-get -y update && apt-get -y install devscripts
+RUN apt-get -y update && apt-get -y install vim
 CMD ["dpkg-buildpackage", "-us", "-uc"]
