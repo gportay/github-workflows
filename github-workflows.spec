@@ -1,5 +1,5 @@
 Name:           github-workflows
-Version:        3
+Version:        4
 Release:        1%{?dist}
 Summary:        My Github Workflows Experimentations
 

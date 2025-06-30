@@ -1,7 +1,7 @@
 # Maintainer: Gaël PORTAY <gael.portay@gmail.com>
 pkgname=(helloworld)
 pkgbase=github-workflows
-pkgver=3
+pkgver=4
 pkgrel=1
 pkgdesc="My Github Workflows Experimentations"
 arch=(x86_64)
