@@ -1,5 +1,6 @@
 # Maintainer: Gaël PORTAY <gael.portay@gmail.com>
-pkgname=(helloworld)
+
+pkgname=(github-workflows-helloworld)
 pkgbase=github-workflows
 pkgver=4
 pkgrel=1
@@ -23,7 +24,7 @@ check() {
 	make test
 }
 
-package_helloworld() {
+package_github-workflows-helloworld() {
 	pkgdesc="Hello, World! From GitHub, and elsewhere."
 
 	cd "$pkgbase-$pkgver"
