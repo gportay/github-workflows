@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Arch Linux outputs
+*.pkg.tar*
+*.tar.gz
+pkg/
+src/
