@@ -10,6 +10,9 @@
 # Uncomment to specify the shell interpreter dynamically according the
 # Dockerfile to be used.
 case "$DOSH_DOCKERFILE" in
+Dockerfile.deb) DOSHELL=/bin/bash
+                home=1
+                ;;
 Dockerfile.rpm) DOSHELL=/bin/bash
                 DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/rpmbuild:$HOME/rpmbuild")
                 DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/github-workflows.spec:$HOME/rpmbuild/SPECS/github-workflows.spec")

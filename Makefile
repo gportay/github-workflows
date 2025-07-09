@@ -20,9 +20,13 @@ install:
 clean:
 	rm -f helloworld
 
-.PHONY: debian 
-debian:
-	debuild -us -uc
+.PHONY: deb
+deb: PATH:=$(CURDIR):$(PATH)
+deb: SHELL=dosh
+deb: export DOSH_DOCKERFILE=Dockerfile.deb
+deb:
+	dpkg-buildpackage -us -uc
+	lintian ../github-workflows*.deb
 
 .PHONY: pkg
 pkg: PATH:=$(CURDIR):$(PATH)
