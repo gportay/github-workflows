@@ -28,5 +28,5 @@ package_github-workflows-helloworld() {
 	pkgdesc="Hello, World! From GitHub, and elsewhere."
 
 	cd "$pkgbase-$pkgver"
-	make DESTDIR="$pkgdir/" PREFIX=/usr install
+	make DESTDIR="$pkgdir" PREFIX=/usr install
 }
