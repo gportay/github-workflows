@@ -7,7 +7,7 @@ Priority: optional
 Standards-Version: 2
 Build-Depends: debhelper-compat (= 13)
 
-Package: helloworld
+Package: github-workflows-helloworld
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Hello, World!

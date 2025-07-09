@@ -3,4 +3,4 @@
 	dh $@
 
 override_dh_auto_install:
-	$(MAKE) DESTDIR=$$(pwd)/debian/helloworld PREFIX=/usr install
+	$(MAKE) PREFIX=/usr DESTDIR=debian/tmp install
