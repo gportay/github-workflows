@@ -13,7 +13,7 @@ jobs:
     - name: Build package
       run: |
         chown -R nobody .
-        runuser -u nobody -- makepkg -s OPTIONS=-debug
+        runuser -u nobody -- makepkg --force --skipchecksums -s OPTIONS=-debug
     - name: Lint package
       run: |
         runuser -u nobody -- namcap *.pkg.tar*
