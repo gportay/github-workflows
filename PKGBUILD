@@ -10,7 +10,7 @@ url="https://github.com/gportay/$pkgbase"
 license=(Unlicense)
 depends=(glibc)
 makedepends=(make)
-source=("$pkgbase-$pkgver::https://github.com/gportay/$pkgbase/archive/v$pkgver.tar.gz")
+source=("$pkgbase-$pkgver.tar.gz::https://github.com/gportay/$pkgbase/archive/v$pkgver.tar.gz")
 sha256sums=(SKIP)
 validpgpkeys=()
 
