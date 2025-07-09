@@ -1,4 +1,5 @@
 PREFIX ?= /usr/local
+VERSION ?= 4
 
 .PHONY: all
 all: helloworld
@@ -6,6 +7,10 @@ all: helloworld
 .PHONY: test
 test: helloworld
 	$(CURDIR)/helloworld | grep -q "^Hello World!$$"
+
+.PHONY: version
+version:
+	@echo $(VERSION)
 
 .PHONY: install
 install:
