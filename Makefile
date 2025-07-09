@@ -23,3 +23,15 @@ clean:
 .PHONY: debian 
 debian:
 	debuild -us -uc
+
+.PHONY: rpm
+rpm: PATH:=$(CURDIR):$(PATH)
+rpm: SHELL=dosh
+rpm: export DOSH_DOCKERFILE=Dockerfile.rpm
+rpm:
+	rpmbuild --undefine=dist --undefine=_disable_source_fetch -ba github-workflows.spec
+	rpmlint ~/rpmbuild/SPECS/github-workflows.spec ~/rpmbuild/SRPMS/github-workflows*.rpm ~/rpmbuild/RPMS/github-workflows*.rpm
+
+rpmbuild/SOURCES/v$(VERSION).tar.gz:
+rpmbuild/SOURCES/v%.tar.gz:
+	git archive --prefix github-workflows-$*/ --format tar.gz --output $@ HEAD
