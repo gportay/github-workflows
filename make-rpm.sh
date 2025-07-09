@@ -1,4 +1,4 @@
-#!/usr/bin/env -S "DOSH_DOCKERFILE=Dockerfile.rpm" dosh
+#!/usr/bin/env -S DOSH_DOCKERFILE=Dockerfile.rpm dosh
 set -e
 rpmdev-setuptree
 rpmbuild --undefine=dist --undefine=_disable_source_fetch -ba github-workflows.spec "$@"
