@@ -19,7 +19,7 @@ jobs:
         runuser -u nobody -- makepkg --force --skipchecksums OPTIONS=-debug
     - name: Lint package
       run: |
-        runuser -u nobody -- namcap *.pkg.tar*
+        runuser -u nobody -- namcap PKGBUILD ${{ github.event.repository.name }}*.pkg.tar*
     - name: Create release
       uses: softprops/action-gh-release@v2
       if: github.ref_type == 'tag'
