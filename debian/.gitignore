@@ -1,0 +1,6 @@
+.debhelper/
+debhelper-build-stamp
+github-workflows-helloworld.substvars
+github-workflows-helloworld/
+files
+tmp/
