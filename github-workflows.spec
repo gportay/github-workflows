@@ -41,5 +41,5 @@ From GitHub, and elsewhere.
 
 
 %changelog
-* Fri Jun 27 2025 gportay
+* Fri Jun 27 2025 Gaël PORTAY <gael.portay@gmail.com> - 4
 - Initial release.

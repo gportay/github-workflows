@@ -1,5 +1,11 @@
 github-workflows (4) UNRELEASED; urgency=low
 
+  * New release.
+
+ -- Gaël PORTAY <gael.portay@gmail.com>  Wed, 09 Jul 2025 08:59:29 +0200
+
+github-workflows (4) UNRELEASED; urgency=low
+
   * Initial release.
 
  -- Gaël PORTAY <gael.portay@gmail.com>  Thu, 1 May 2025 20:18:27 +0200
