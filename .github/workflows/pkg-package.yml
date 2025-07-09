@@ -12,6 +12,9 @@ jobs:
         pacman -Sy --noconfirm namcap
     - name: Build package
       run: |
+        ver="$(make version)"
+        tar czf "../${{ github.event.repository.name }}-$ver.tar.gz" --transform "s/./${{ github.event.repository.name }}-$ver/" .
+        mv "../${{ github.event.repository.name }}-$ver.tar.gz" .
         chown -R nobody .
         runuser -u nobody -- makepkg --force --skipchecksums OPTIONS=-debug
     - name: Lint package
