@@ -20,3 +20,20 @@ jobs:
       if: github.ref_type == 'tag'
       with:
         files: LinuxX86-64.tar.gz
+  build-arm:
+    runs-on: ubuntu-24.04-arm
+    steps:
+    - uses: actions/checkout@v4
+    - name: Compile
+      run: make
+    - name: Run test
+      run: make test
+    - name: Install
+      run: |
+        make install PREFIX="$PWD/_install"
+        ( cd "$PWD/_install" && tar czf ../LinuxARM64.tar.gz . )
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      if: github.ref_type == 'tag'
+      with:
+        files: LinuxARM64.tar.gz
