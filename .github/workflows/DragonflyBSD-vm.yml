@@ -1,0 +1,27 @@
+name: DragonflyBSD-vm
+
+on: workflow_dispatch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: A job to run test in DragonflyBSD
+    steps:
+    - uses: actions/checkout@v4
+    - name: Test in DragonflyBSD
+      id: test
+      uses: vmactions/dragonflybsd-vm@v1
+      with:
+        usesh: true
+        prepare: |
+          pkg install -y bash
+          pkg install -y gmake
+        run: |
+          gmake test
+          gmake install PREFIX="$PWD/_install"
+          ( cd "$PWD/_install" && tar czf ../DragonflyBSD.tar.gz . )
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      if: github.ref_type == 'tag'
+      with:
+        files: DragonflyBSD.tar.gz
