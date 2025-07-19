@@ -42,7 +42,7 @@ rpm: PATH:=$(CURDIR):$(PATH)
 rpm: SHELL=dosh
 rpm: export DOSH_DOCKERFILE=Dockerfile.rpm
 rpm:
-	rpmbuild --undefine=dist --undefine=_disable_source_fetch -ba github-workflows.spec
+	rpmbuild --undefine=_disable_source_fetch -ba github-workflows.spec
 	rpmlint ~/rpmbuild/SPECS/github-workflows.spec ~/rpmbuild/SRPMS/github-workflows*.rpm ~/rpmbuild/RPMS/github-workflows*.rpm
 
 rpmbuild/SOURCES/v$(VERSION).tar.gz:

@@ -1,6 +1,6 @@
 Name:           github-workflows
 Version:        5
-Release:        1%{?dist}
+Release:        1
 Summary:        My Github Workflows Experimentations
 
 License:        Unlicense
