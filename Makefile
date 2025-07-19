@@ -1,5 +1,5 @@
 PREFIX ?= /usr/local
-VERSION ?= 5
+VERSION ?= 6
 
 .PHONY: all
 all: helloworld
