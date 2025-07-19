@@ -14,7 +14,8 @@ version:
 
 .PHONY: install
 install:
-	install -D -m0755 helloworld $(DESTDIR)$(PREFIX)/bin/helloworld
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
+	cp helloworld $(DESTDIR)$(PREFIX)/bin/helloworld
 
 .PHONY: clean
 clean:
