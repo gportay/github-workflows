@@ -17,9 +17,12 @@ install:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp helloworld $(DESTDIR)$(PREFIX)/bin/helloworld
 
-.PHONY: clean
-clean:
+.PHONY: mostlyclean
+mostlyclean:
 	rm -f helloworld
+
+.PHONY: clean
+clean: mostlyclean
 	rm -f rpmbuild/SOURCES/*.tar.gz
 	rm -f github-workflows-*.tar.gz
 
