@@ -20,6 +20,8 @@ install:
 .PHONY: clean
 clean:
 	rm -f helloworld
+	rm -f rpmbuild/SOURCES/*.tar.gz
+	rm -f github-workflows-*.tar.gz
 
 .PHONY: deb
 deb: PATH:=$(CURDIR):$(PATH)
