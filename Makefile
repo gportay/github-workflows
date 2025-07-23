@@ -32,7 +32,7 @@ deb: SHELL=dosh
 deb: export DOSH_DOCKERFILE=Dockerfile.deb
 deb:
 	dpkg-buildpackage -us -uc
-	lintian ../github-workflows*.deb
+	lintian ../github-workflows*.dsc ../github-workflows*.deb
 
 .PHONY: pkg
 pkg: PATH:=$(CURDIR):$(PATH)
