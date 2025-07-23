@@ -23,12 +23,13 @@ mostlyclean:
 
 .PHONY: clean
 clean: mostlyclean
-	rm -f rpmbuild/SOURCES/*.tar.gz
 	rm -f debian/files debian/debhelper-build-stamp debian/*.substvars \
 	   -R debian/.debhelper/ debian/tmp/ \
 	      debian/github-workflows-helloworld/
 	rm -f *.tar.gz src/*.tar.gz *.pkg.tar* \
 	   -R src/github-workflows-*/ pkg/github-workflows-*/
+	rm -f rpmbuild/SOURCES/*.tar.gz rpmbuild/SPECS/*.spec \
+	      rpmbuild/SRPMS/*.rpm rpmbuild/RPMS/*/*.rpm
 
 .PHONY: deb
 deb: PATH:=$(CURDIR):$(PATH)
