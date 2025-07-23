@@ -4,7 +4,7 @@ Homepage: https://www.portay.io/github-workflows
 Vcs-Git: https://github.com/gportay/github-workflows
 Section: misc
 Priority: optional
-Standards-Version: 2
+Standards-Version: 4.6.2
 Build-Depends: debhelper-compat (= 13)
 
 Package: github-workflows-helloworld
