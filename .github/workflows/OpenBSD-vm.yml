@@ -1,6 +1,7 @@
 name: OpenBSD-vm
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - v**

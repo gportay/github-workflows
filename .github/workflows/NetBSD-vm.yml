@@ -1,6 +1,7 @@
 name: NetBSD-vm
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - v**
