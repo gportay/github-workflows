@@ -1,0 +1,34 @@
+# Maintainer: Gaël PORTAY <gael.portay@gmail.com>
+
+pkgname=(github-workflows-helloworld-git)
+pkgbase=github-workflows
+pkgver=master
+pkgrel=1
+pkgdesc="My Github Workflows Experimentations"
+arch=(x86_64)
+url="https://github.com/gportay/$pkgbase"
+license=(Unlicense)
+depends=(glibc)
+makedepends=(make git)
+source=("$pkgbase-git::git+https://github.com/gportay/$pkgbase.git")
+sha256sums=(SKIP)
+validpgpkeys=()
+
+build() {
+	cd "$srcdir/$pkgbase-git"
+	make
+}
+
+check() {
+	cd "$srcdir/$pkgbase-git"
+	make test
+}
+
+package_github-workflows-helloworld-git() {
+	pkgdesc="Hello, World! From GitHub, and elsewhere."
+	provides=(github-workflows-helloworld)
+	conflicts=(github-workflows-helloworld)
+
+	cd "$srcdir/$pkgbase-git"
+	make DESTDIR="$pkgdir" PREFIX=/usr install
+}
