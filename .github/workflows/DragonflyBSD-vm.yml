@@ -1,6 +1,9 @@
 name: DragonflyBSD-vm
 
-on: workflow_dispatch
+on:
+  push:
+    tags:
+      - v**
 
 jobs:
   test:

@@ -1,6 +1,9 @@
 name: Sign CI
 
-on: workflow_dispatch
+on:
+  push:
+    tags:
+      - v**
 
 jobs:
   build:
