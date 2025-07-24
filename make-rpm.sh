@@ -1,4 +1,4 @@
-#!/usr/bin/env -S DOSH_DOCKERFILE=Dockerfile.rpm dosh
+#!/usr/bin/env -S DOSH_DOCKERFILE=Dockerfile.rpm DOSH_DOCKER_RUN_EXTRA_OPTS="--volume ${PWD}/rpmbuild:${HOME}/rpmbuild --volume ${PWD}/github-workflows.spec:${HOME}/rpmbuild/SPECS/github-workflows.spec" dosh
 set -e
 rpmdev-setuptree
 cd ~/rpmbuild/SPECS
