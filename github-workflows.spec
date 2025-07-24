@@ -1,5 +1,5 @@
 Name:           github-workflows
-Version:        6
+Version:        7
 Release:        1
 Summary:        My Github Workflows Experimentations
 
@@ -41,6 +41,8 @@ From GitHub, and elsewhere.
 
 
 %changelog
+* Thu Jul 24 2025 Gaël PORTAY <gael.portay@gmail.com> - 7
+- New release.
 * Wed Jul 19 2025 Gaël PORTAY <gael.portay@gmail.com> - 6
 - New release.
 * Wed Jul 09 2025 Gaël PORTAY <gael.portay@gmail.com> - 5
