@@ -8,5 +8,6 @@
 [![OpenBSD-vm](https://github.com/gportay/github-workflows/actions/workflows/OpenBSD-vm.yml/badge.svg)](https://github.com/gportay/github-workflows/actions/workflows/OpenBSD-vm.yml)
 [![FreeBSD-vm](https://github.com/gportay/github-workflows/actions/workflows/FreeBSD-vm.yml/badge.svg)](https://github.com/gportay/github-workflows/actions/workflows/FreeBSD-vm.yml)
 [![Makefile CI](https://github.com/gportay/github-workflows/actions/workflows/makefile.yml/badge.svg)](https://github.com/gportay/github-workflows/actions/workflows/makefile.yml)
+[![Sign CI](https://github.com/gportay/github-workflows/actions/workflows/sign.yml/badge.svg)](https://github.com/gportay/github-workflows/actions/workflows/sign.yml)
 
 My Github Workflows Experimentations
