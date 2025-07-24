@@ -57,6 +57,9 @@ rpm:
 	rpmbuild --undefine=_disable_source_fetch -ba github-workflows.spec
 	rpmlint ~/rpmbuild/SPECS/github-workflows.spec ~/rpmbuild/SRPMS/github-workflows*.rpm ~/rpmbuild/RPMS/github-workflows*.rpm
 
+.PHONY: sources
+sources: github-workflows-$(VERSION).tar.gz rpmbuild/SOURCES/v$(VERSION).tar.gz
+
 rpmbuild/SOURCES/v$(VERSION).tar.gz:
 rpmbuild/SOURCES/v%.tar.gz:
 	git archive --prefix github-workflows-$*/ --format tar.gz --output $@ HEAD
