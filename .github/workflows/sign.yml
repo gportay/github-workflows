@@ -1,0 +1,43 @@
+name: Sign CI
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Create archive
+      run: |
+        ver="$(make version)"
+        tar czf "../${{ github.event.repository.name }}-$ver.tar.gz" --transform "s/./${{ github.event.repository.name }}-$ver/" .
+        mv "../${{ github.event.repository.name }}-$ver.tar.gz" .
+    - name: Import private key
+      env:
+        GPG_PRIVATE_KEY: ${{ secrets.PGP_PRIVATE_KEY_BLOCK }}
+      run: |
+        echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+    - name: Sign file
+      env:
+        GPG_PRIVATE_KEY_PASSPHRASE: ${{ secrets.PGP_PRIVATE_KEY_PASSPHRASE }}
+      run: |
+        echo "$GPG_PRIVATE_KEY_PASSPHRASE" | gpg --pinentry-mode=loopback --passphrase="$GPG_PRIVATE_KEY_PASSPHRASE" --default-key "${{ vars.PGP_KEY_NAME }}" --detach-sign --no-armor ${{ github.event.repository.name }}*.tar.gz
+    - name: Remove keys
+      run: |
+        gpg --batch --yes --delete-secret-keys "${{ vars.PGP_KEY_NAME }}"
+        gpg --batch --yes --delete-keys "${{ vars.PGP_KEY_NAME }}"
+    - name: Import public keys
+      run: |
+        gpg --keyserver hkp://keys.gnupg.net --recv-keys 8F3491E60E62695ED780AC672FA122CA0501CA71
+        gpg --batch --import *.asc
+    - name: Verify file
+      run: |
+        gpg --verify ${{ github.event.repository.name }}*.tar.gz.sig
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      if: github.ref_type == 'tag'
+      with:
+        files: |
+          *.asc
+          ${{ github.event.repository.name }}*.sig
+          ${{ github.event.repository.name }}*.tar.gz
