@@ -15,6 +15,8 @@ jobs:
       run: |
         pacman -Sy --noconfirm git namcap shellcheck
     - name: Build package
+      env:
+        PKGEXT: .pkg.tar.zst
       run: |
         ver="$(make version)"
         tar czf "../${{ github.event.repository.name }}-$ver.tar.gz" --transform "s/./${{ github.event.repository.name }}-$ver/" .
@@ -24,10 +26,10 @@ jobs:
     - name: Lint package
       run: |
         shellcheck --shell=bash --exclude=SC2034,SC2154,SC2164 PKGBUILD*
-        runuser -u nobody -- namcap PKGBUILD* ${{ github.event.repository.name }}*.pkg.tar*
+        runuser -u nobody -- namcap PKGBUILD* ${{ github.event.repository.name }}*.pkg.tar.zst
     - name: Create release
       uses: softprops/action-gh-release@v2
       if: github.ref_type == 'tag'
       with:
         files: |
-          ${{ github.event.repository.name }}*.pkg.tar*
+          ${{ github.event.repository.name }}*.pkg.tar.zst
