@@ -43,7 +43,7 @@ From GitHub, and elsewhere.
 %changelog
 * Thu Jul 24 2025 Gaël PORTAY <gael.portay@gmail.com> - 7
 - New release.
-* Wed Jul 19 2025 Gaël PORTAY <gael.portay@gmail.com> - 6
+* Sat Jul 19 2025 Gaël PORTAY <gael.portay@gmail.com> - 6
 - New release.
 * Wed Jul 09 2025 Gaël PORTAY <gael.portay@gmail.com> - 5
 - New release.
