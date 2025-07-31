@@ -15,10 +15,22 @@ jobs:
       run: |
         sudo apt-get -y update
         sudo apt-get -y install build-essential debhelper devscripts
+    - name: Setup GPG
+      env:
+        GPG_PRIVATE_KEY: ${{ secrets.PGP_PRIVATE_KEY_BLOCK }}
+      run: |
+        echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+        cat <<EOF >/usr/local/bin/gpg
+        #!/bin/bash
+        exec /usr/bin/gpg --batch --pinentry-mode=loopback --passphrase-fd=0 "\$@"
+        EOF
+        chmod +x /usr/local/bin/gpg
     - name: Build package
+      env:
+        GPG_PRIVATE_KEY_PASSPHRASE: ${{ secrets.PGP_PRIVATE_KEY_PASSPHRASE }}
       run: |
         cd ${{ github.event.repository.name }}
-        dpkg-buildpackage -us -uc
+        echo "$GPG_PRIVATE_KEY_PASSPHRASE" | dpkg-buildpackage --force-sign --sign-keyid="${{ vars.PGP_KEY_NAME }}"
         cd ..
     - name: Lint package
       run: |
