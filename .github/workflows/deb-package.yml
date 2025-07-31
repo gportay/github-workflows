@@ -32,6 +32,7 @@ jobs:
         cd ${{ github.event.repository.name }}
         echo "$GPG_PRIVATE_KEY_PASSPHRASE" | dpkg-buildpackage --force-sign --sign-keyid="${{ vars.PGP_KEY_NAME }}"
         cd ..
+        echo "$GPG_PRIVATE_KEY_PASSPHRASE" | gpg --detach-sign --no-armor ${{ github.event.repository.name }}*.deb
     - name: Lint package
       run: |
         lintian ${{ github.event.repository.name }}*.dsc ${{ github.event.repository.name }}*.deb
@@ -42,3 +43,4 @@ jobs:
         files: |
           ${{ github.event.repository.name }}*.dsc
           ${{ github.event.repository.name }}*.deb
+          ${{ github.event.repository.name }}*.sig
