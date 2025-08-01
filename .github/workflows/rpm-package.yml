@@ -32,7 +32,7 @@ jobs:
         rpmbuild --undefine=_disable_source_fetch -ba ${{ github.event.repository.name }}.spec
         cd -
         cp ~/rpmbuild/SRPMS/*.rpm ~/rpmbuild/RPMS/*/*.rpm .
-        echo "$GPG_PRIVATE_KEY_PASSPHRASE" | gpg --batch --pinentry-mode=loopback --passphrase-fd=0 --detach-sign --no-armor ${{ github.event.repository.name }}*.rpm
+        for i in ${{ github.event.repository.name }}*.rpm; do echo "$GPG_PRIVATE_KEY_PASSPHRASE" | gpg --batch --pinentry-mode=loopback --passphrase-fd=0 --detach-sign --no-armor "$i"; done
     - name: Lint package
       run: |
         rpmlint ${{ github.event.repository.name }}.spec ${{ github.event.repository.name }}*.rpm
