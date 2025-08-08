@@ -7,14 +7,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: debian:bookworm
     steps:
     - uses: actions/checkout@v4
       with:
         path: ${{ github.event.repository.name }}
     - name: Install dependencies
       run: |
-        sudo apt-get -y update
-        sudo apt-get -y install build-essential debhelper devscripts
+        apt-get -y update
+        apt-get -y install build-essential debhelper devscripts
     - name: Setup GPG
       env:
         GPG_PRIVATE_KEY: ${{ secrets.PGP_PRIVATE_KEY_BLOCK }}
