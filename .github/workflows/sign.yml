@@ -30,9 +30,8 @@ jobs:
       run: |
         gpg --batch --yes --delete-secret-keys "${{ vars.PGP_KEY_NAME }}"
         gpg --batch --yes --delete-keys "${{ vars.PGP_KEY_NAME }}"
-    - name: Import public keys
+    - name: Import public key
       run: |
-        gpg --keyserver hkp://keys.gnupg.net --recv-keys 8F3491E60E62695ED780AC672FA122CA0501CA71
         gpg --batch --import *.asc
     - name: Verify file
       run: |
