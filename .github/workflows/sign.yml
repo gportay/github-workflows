@@ -16,11 +16,16 @@ jobs:
         ver="$(make version)"
         tar czf "../${{ github.event.repository.name }}-$ver.tar.gz" --transform "s/./${{ github.event.repository.name }}-$ver/" .
         mv "../${{ github.event.repository.name }}-$ver.tar.gz" .
-    - name: Import private key
+    - name: Import keys
       env:
         GPG_PRIVATE_KEY: ${{ secrets.PGP_PRIVATE_KEY_BLOCK }}
+        GPG_PUBLIC_KEY: ${{ secrets.PGP_PUBLIC_KEY_BLOCK }}
       run: |
         echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+        echo "$GPG_PUBLIC_KEY" | gpg --batch --import
+    - name: Export public key
+      run: |
+        gpg --armor --export "${{ vars.PGP_KEY_NAME }}" >github-signing-key-signed.asc
     - name: Sign file
       env:
         GPG_PRIVATE_KEY_PASSPHRASE: ${{ secrets.PGP_PRIVATE_KEY_PASSPHRASE }}
@@ -32,7 +37,7 @@ jobs:
         gpg --batch --yes --delete-keys "${{ vars.PGP_KEY_NAME }}"
     - name: Import public key
       run: |
-        gpg --batch --import *.asc
+        gpg --batch --import github-signing-key-signed.asc
     - name: Verify file
       run: |
         gpg --verify ${{ github.event.repository.name }}*.tar.gz.sig
