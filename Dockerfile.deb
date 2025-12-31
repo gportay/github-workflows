@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:trixie
 ENV DPKG_FRONTEND=noninteractive
 RUN apt-get -y update && apt-get -y install build-essential debhelper devscripts
 CMD ["dpkg-buildpackage", "-us", "-uc"]
