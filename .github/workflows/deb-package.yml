@@ -25,7 +25,7 @@ jobs:
         mv /usr/bin/gpg /usr/bin/gpg.real
         cat <<EOF >/usr/bin/gpg
         #!/bin/bash
-        exec /usr/bin/gpg.real --no-tty --batch --pinentry-mode=loopback --passphrase-fd=0 "\$@"
+        exec /usr/bin/gpg.real --batch --no-tty --pinentry-mode=loopback --passphrase-fd=0 "\$@"
         EOF
         chmod +x /usr/bin/gpg
     - name: Build package
