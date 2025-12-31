@@ -37,8 +37,8 @@ jobs:
         gpg --batch --yes --delete-keys "${{ vars.PGP_KEY_NAME }}"
     - name: Import public keys
       run: |
-        gpg --batch --import github-signing-key-signed.asc
         gpg --keyserver hkp://keys.gnupg.net --recv-keys 8F3491E60E62695ED780AC672FA122CA0501CA71
+        gpg --keyserver hkp://keys.gnupg.net --recv-keys "${{ vars.PGP_KEY_NAME }}"
     - name: Verify file
       run: |
         gpg --trusted-key 8F3491E60E62695ED780AC672FA122CA0501CA71 --verify ${{ github.event.repository.name }}*.tar.gz.sig
