@@ -61,9 +61,12 @@ rpm:
 sources: github-workflows-$(VERSION).tar.gz rpmbuild/SOURCES/v$(VERSION).tar.gz
 
 rpmbuild/SOURCES/v$(VERSION).tar.gz:
-rpmbuild/SOURCES/v%.tar.gz:
+rpmbuild/SOURCES/v%.tar.gz: FORCE
 	git archive --prefix github-workflows-$*/ --format tar.gz --output $@ HEAD
 
 github-workflows-$(VERSION).tar.gz:
-%.tar.gz:
+%.tar.gz: FORCE
 	git archive --prefix $*/ --format tar.gz --output $@ HEAD
+
+.PHONY: FORCE
+FORCE:
