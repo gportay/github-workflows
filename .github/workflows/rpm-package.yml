@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
   push:
     tags:
-      - v**
+      - "v**"
     paths:
-      - **.spec
+      - "**.spec"
 
 jobs:
   build:
