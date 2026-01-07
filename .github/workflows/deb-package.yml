@@ -36,7 +36,7 @@ jobs:
         GPG_PRIVATE_KEY_PASSPHRASE: ${{ secrets.PGP_PRIVATE_KEY_PASSPHRASE }}
       run: |
         cd ${{ github.event.repository.name }}
-        echo "$GPG_PRIVATE_KEY_PASSPHRASE" | dpkg-buildpackage --force-sign --sign-keyid="${{ vars.PGP_KEY_NAME }}"
+        echo "$GPG_PRIVATE_KEY_PASSPHRASE" | dpkg-buildpackage --force-sign --sign-keyid="${{ vars.PGP_KEY_NAME }}" --sign-backend=gpg
         cd ..
         for i in ${{ github.event.repository.name }}*.deb; do echo "$GPG_PRIVATE_KEY_PASSPHRASE" | gpg --detach-sign --no-armor "$i"; done
     - name: Lint package
