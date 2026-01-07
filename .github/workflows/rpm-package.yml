@@ -28,8 +28,8 @@ jobs:
       run: |
         rpmdev-setuptree
         ver="$(make version)"
-        tar czf "../$ver.tar.gz" --transform "s/./${{ github.event.repository.name }}-$ver/" .
-        mv "../$ver.tar.gz" ~/rpmbuild/SOURCES/
+        tar czf "../v$ver.tar.gz" --transform "s/./${{ github.event.repository.name }}-$ver/" .
+        mv "../v$ver.tar.gz" ~/rpmbuild/SOURCES/
         cp ${{ github.event.repository.name }}.spec ~/rpmbuild/SPECS/
         cd ~/rpmbuild/SPECS/
         rpmbuild --undefine=_disable_source_fetch -ba ${{ github.event.repository.name }}.spec
