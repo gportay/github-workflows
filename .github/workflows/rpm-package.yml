@@ -2,9 +2,6 @@ name: Deploy RPM package to GitHub Release
 on:
   workflow_dispatch:
   push:
-    tags:
-      - v**
-  push:
     paths:
       - '**.spec'
 
