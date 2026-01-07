@@ -4,6 +4,9 @@ on:
   push:
     tags:
       - v**
+    paths:
+      - PKGBUILD**
+
 jobs:
   build:
     runs-on: ubuntu-latest

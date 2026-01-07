@@ -4,6 +4,9 @@ on:
   push:
     tags:
       - v**
+    paths:
+      - debian/**
+
 jobs:
   build:
     runs-on: ubuntu-latest
