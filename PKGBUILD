@@ -2,7 +2,7 @@
 
 pkgname=(github-workflows-helloworld)
 pkgbase=github-workflows
-pkgver=10
+pkgver=11
 pkgrel=1
 pkgdesc="My Github Workflows Experimentations"
 arch=(x86_64)
