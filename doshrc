@@ -11,7 +11,8 @@
 # Dockerfile to be used.
 case "$DOSH_DOCKERFILE" in
 Dockerfile.pkg) DOSHELL=/bin/bash;;
-Dockerfile.deb) DOSHELL=/bin/bash
+docker/deb/Dockerfile)
+                DOSHELL=/bin/bash
                 home=1
                 ;;
 docker/rpm/Dockerfile)

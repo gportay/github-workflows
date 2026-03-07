@@ -34,7 +34,7 @@ clean: mostlyclean
 .PHONY: deb
 deb: PATH:=$(CURDIR):$(PATH)
 deb: SHELL=dosh
-deb: export DOSH_DOCKERFILE=Dockerfile.deb
+deb: export DOSH_DOCKERFILE=docker/deb/Dockerfile
 deb:
 	dpkg-buildpackage -us -uc
 	lintian ../github-workflows*.dsc ../github-workflows*.deb
