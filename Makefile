@@ -51,7 +51,7 @@ pkg:
 .PHONY: rpm
 rpm: PATH:=$(CURDIR):$(PATH)
 rpm: SHELL=dosh
-rpm: export DOSH_DOCKERFILE=Dockerfile.rpm
+rpm: export DOSH_DOCKERFILE=docker/rpm/Dockerfile
 rpm:
 	cd ~/rpmbuild/SPECS
 	rpmbuild --undefine=_disable_source_fetch -ba github-workflows.spec

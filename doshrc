@@ -14,7 +14,8 @@ Dockerfile.pkg) DOSHELL=/bin/bash;;
 Dockerfile.deb) DOSHELL=/bin/bash
                 home=1
                 ;;
-Dockerfile.rpm) DOSHELL=/bin/bash
+docker/rpm/Dockerfile)
+                DOSHELL=/bin/bash
                 DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/rpmbuild:$HOME/rpmbuild")
                 DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/github-workflows.spec:$HOME/rpmbuild/SPECS/github-workflows.spec")
                 ;;
