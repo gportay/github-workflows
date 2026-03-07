@@ -42,7 +42,7 @@ deb:
 .PHONY: pkg
 pkg: PATH:=$(CURDIR):$(PATH)
 pkg: SHELL=dosh
-pkg: export DOSH_DOCKERFILE=Dockerfile.pkg
+pkg: export DOSH_DOCKERFILE=docker/pkg/Dockerfile
 pkg:
 	makepkg --force --skipchecksums
 	shellcheck --shell=bash --exclude=SC2034,SC2154,SC2164 PKGBUILD*
