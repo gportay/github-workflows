@@ -4,6 +4,10 @@ VERSION ?= 11
 .PHONY: all
 all: helloworld
 
+.PHONY: doc
+doc:
+	$(MAKE) -C $@ html
+
 .PHONY: test
 test: helloworld
 	$(CURDIR)/helloworld | grep -q "^Hello World!$$"
@@ -23,6 +27,7 @@ mostlyclean:
 
 .PHONY: clean
 clean: mostlyclean
+	$(MAKE) -C doc clean
 	rm -f debian/files debian/debhelper-build-stamp debian/*.substvars \
 	   -R debian/.debhelper/ debian/tmp/ \
 	      debian/github-workflows-helloworld/
