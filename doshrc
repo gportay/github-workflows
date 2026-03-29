@@ -6,22 +6,24 @@
 # reads and executes commands from the current directory file ./doshrc, if that
 # file exists. The --no-doshprofile and --no-doshrc options may be used to
 # inhibit this behavior.
+#
+# This is run by dosh from the host
 
 # Uncomment to specify the shell interpreter dynamically according the
 # Dockerfile to be used.
 case "$DOSH_DOCKERFILE" in
 docker/pkg/Dockerfile)
-                DOSHELL=/bin/bash
-                ;;
+	DOSHELL=/bin/bash
+	;;
 docker/deb/Dockerfile)
-                DOSHELL=/bin/bash
-                home=1
-                ;;
+	DOSHELL=/bin/bash
+	parent=1
+	;;
 docker/rpm/Dockerfile)
-                DOSHELL=/bin/bash
-                DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/rpmbuild:$HOME/rpmbuild")
-                DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/github-workflows.spec:$HOME/rpmbuild/SPECS/github-workflows.spec")
-                ;;
+	DOSHELL=/bin/bash
+	DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/rpmbuild:$HOME/rpmbuild")
+	DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/github-workflows.spec:$HOME/rpmbuild/SPECS/github-workflows.spec")
+	;;
 esac
 
 # Uncomment to use the same shell interpreter in container than the one which
@@ -34,18 +36,18 @@ esac
 # Uncomment to save the bash history from the container locally.
 #if [ -r "$PWD/.bash_history" ]
 #then
-#	DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/.bash_history:$HOME/.bash_history")
+#	DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/.bash_history:$HOME/.bash_history:${mount_options:-rw}")
 #fi
 
 # Uncomment to use the ssh settings from host.
 #if [ -d "$HOME/.ssh" ]
 #then
-#	DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$HOME/.ssh:$HOME/.ssh")
+#	DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$HOME/.ssh:$HOME/.ssh:${mount_options:-rw}")
 #fi
 #if [ -n "${SSH_AUTH_SOCK:-}" ]
 #then
 #	DOSH_DOCKER_RUN_EXTRA_OPTS+=(--env SSH_AUTH_SOCK)
-#	DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$SSH_AUTH_SOCK:$SSH_AUTH_SOCK")
+#	DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$SSH_AUTH_SOCK:$SSH_AUTH_SOCK:${mount_options:-rw}")
 #fi
 
 # Uncomment to enable X.
@@ -59,7 +61,7 @@ esac
 #	dotxauthority="${XAUTHORITY:-$HOME/.Xauthority}"
 #	if [ -e "$dotxauthority" ]
 #	then
-#		DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$dotxauthority:$HOME/.Xauthority")
+#		DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$dotxauthority:$HOME/.Xauthority:${mount_options:rw}")
 #	fi
 #	unset dotxauthority
 #	xsock="${XSOCK:-/tmp/.X11-unix}"
@@ -69,10 +71,13 @@ esac
 #	fi
 #	unset xsock
 #fi
-# Use /bin/bash
-DOSHELL="/bin/bash"
-for file in .bashrc .bash_history
-do
-	[ -e "$PWD/$file" ] || continue
-	DOSH_DOCKER_RUN_EXTRA_OPTS+=(--volume "$PWD/$file:$HOME/$file")
-done
+#
+# Uncomment to change SELinux label to unshare the volume with the containers.
+#DOSH_MOUNT_OPTIONS=Z
+#
+# Or, uncomment to change SELinux label to share the volume content with
+# containers.
+#DOSH_MOUNT_OPTIONS=z
+#
+# Or, uncomment to disable SELinux label.
+#DOSH_DOCKER_RUN_EXTRA_OPTS+=(--security-opt label=disable)
