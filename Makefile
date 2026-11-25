@@ -33,8 +33,23 @@ clean: mostlyclean
 	      debian/github-workflows-helloworld/
 	rm -f *.tar.gz src/*.tar.gz *.pkg.tar* \
 	   -R src/github-workflows-*/ pkg/github-workflows-*/
+	rm -f *.bottle.tar.gz *.bottle.json
 	rm -f rpmbuild/SOURCES/*.tar.gz rpmbuild/SPECS/*.spec \
 	      rpmbuild/SRPMS/*.rpm rpmbuild/RPMS/*/*.rpm
+
+.PHONY: brew
+brew: PATH:=$(CURDIR):$(PATH)
+brew: SHELL=dosh
+brew: export DOSH_DOCKERFILE=docker/brew/Dockerfile
+brew:
+	set -e; \
+	brew tap-new --no-git local/github-workflows; \
+	cp Formula/github-workflows-helloworld.rb "$$(brew --repository local/github-workflows)/Formula/"; \
+	brew install --build-bottle local/github-workflows/github-workflows-helloworld; \
+	brew test local/github-workflows/github-workflows-helloworld; \
+	brew bottle --json local/github-workflows/github-workflows-helloworld; \
+	brew style Formula/github-workflows-helloworld.rb; \
+	brew audit --strict local/github-workflows/github-workflows-helloworld
 
 .PHONY: deb
 deb: PATH:=$(CURDIR):$(PATH)

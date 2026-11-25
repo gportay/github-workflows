@@ -56,3 +56,7 @@ dkms.conf
 *.tar.gz
 pkg/
 src/
+
+# Homebrew outputs
+*.bottle.json
+*.bottle.tar.gz

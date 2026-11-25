@@ -12,6 +12,9 @@
 # Uncomment to specify the shell interpreter dynamically according the
 # Dockerfile to be used.
 case "$DOSH_DOCKERFILE" in
+docker/brew/Dockerfile)
+	DOSHELL=/bin/bash
+	;;
 docker/pkg/Dockerfile)
 	DOSHELL=/bin/bash
 	;;
