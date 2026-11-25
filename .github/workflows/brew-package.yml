@@ -1,0 +1,63 @@
+name: Deploy Homebrew package to GitHub Release
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest   # Linux x86_64
+          - macos-15-intel  # macOS Intel
+          - macos-latest    # macOS Apple Silicon
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+      HOMEBREW_NO_INSTALL_CLEANUP: 1
+      TAP: local/${{ github.event.repository.name }}
+      FORMULA: local/${{ github.event.repository.name }}/${{ github.event.repository.name }}-helloworld
+    steps:
+    - uses: actions/checkout@v4
+    - uses: Homebrew/actions/setup-homebrew@main
+    - name: Install dependencies
+      run: |
+        brew install gnupg
+    - name: Setup GPG
+      env:
+        GPG_PRIVATE_KEY: ${{ secrets.PGP_PRIVATE_KEY_BLOCK }}
+      run: |
+        echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+    - name: Build package
+      env:
+        GPG_PRIVATE_KEY_PASSPHRASE: ${{ secrets.PGP_PRIVATE_KEY_PASSPHRASE }}
+      run: |
+        ver="$(make version)"
+        make "${{ github.event.repository.name }}-$ver.tar.gz"
+        sha256="$(shasum -a 256 "${{ github.event.repository.name }}-$ver.tar.gz" | cut -d' ' -f1)"
+        brew tap-new --no-git "$TAP"
+        formula="$(brew --repository "$TAP")/Formula/${{ github.event.repository.name }}-helloworld.rb"
+        cp Formula/${{ github.event.repository.name }}-helloworld.rb "$formula"
+        perl -pi -e "s|^  url \".*\"|  url \"file://$PWD/${{ github.event.repository.name }}-$ver.tar.gz\"|; s|^  sha256 \".*\"|  sha256 \"$sha256\"|" "$formula"
+        brew install --build-bottle "$FORMULA"
+        brew test "$FORMULA"
+        brew bottle --json --root-url="https://github.com/${{ github.repository }}/releases/download/v$ver" "$FORMULA"
+        for i in ${{ github.event.repository.name }}-*--*.bottle.*; do mv "$i" "${i/--/-}"; done
+        for i in ${{ github.event.repository.name }}*.bottle.tar.gz; do echo "$GPG_PRIVATE_KEY_PASSPHRASE" | gpg --batch --pinentry-mode=loopback --passphrase-fd=0 --detach-sign --no-armor "$i"; done
+    - name: Lint package
+      run: |
+        brew style Formula/${{ github.event.repository.name }}-helloworld.rb
+        brew audit --strict "$FORMULA"
+    - name: Create release
+      uses: softprops/action-gh-release@v2
+      if: github.ref_type == 'tag'
+      with:
+        files: |
+          ${{ github.event.repository.name }}*.bottle.tar.gz
+          ${{ github.event.repository.name }}*.bottle.json
+          ${{ github.event.repository.name }}*.sig

@@ -1,5 +1,6 @@
 # github-workflows
 
+[![Deploy Homebrew package to GitHub Release](https://github.com/gportay/github-workflows/actions/workflows/brew-package.yml/badge.svg)](https://github.com/gportay/github-workflows/actions/workflows/brew-package.yml)
 [![Deploy Arch Linux package to GitHub Release](https://github.com/gportay/github-workflows/actions/workflows/pkg-package.yml/badge.svg)](https://github.com/gportay/github-workflows/actions/workflows/pkg-package.yml)
 [![Deploy Debian package to GitHub Release](https://github.com/gportay/github-workflows/actions/workflows/deb-package.yml/badge.svg)](https://github.com/gportay/github-workflows/actions/workflows/deb-package.yml)
 [![Deploy RPM package to GitHub Release](https://github.com/gportay/github-workflows/actions/workflows/rpm-package.yml/badge.svg)](https://github.com/gportay/github-workflows/actions/workflows/rpm-package.yml)
